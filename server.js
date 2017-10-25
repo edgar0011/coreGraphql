@@ -22,8 +22,19 @@ const app = express();
 // app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 // app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
-app.use('/graphql', graphqlHTTP({ schema, graphiql: false }));
-app.use('/graphiql', graphqlHTTP({ schema, graphiql: true }));
+// app.use('/graphql', graphqlHTTP({ schema, graphiql: false }));
+// app.use('/graphiql', graphqlHTTP({ schema, graphiql: true }));
+
+app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+
+app.use((req, res, next) => {
+  console.log('Request:');
+  console.log(req);
+  console.log('Response:');
+  console.log(res);
+  res.status(200).json({ name: 'Well, Hard to tell...' });
+  next();
+});
 
 app.get('/', (req, res) => {
   res.json({ result: 'ok' });
