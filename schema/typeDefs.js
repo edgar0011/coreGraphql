@@ -1,5 +1,5 @@
 export default `
   type Query {
-    hello(name: String!): String!
+    hello(name: String!): String
   }
-`;
+`
