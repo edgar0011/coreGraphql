@@ -29,6 +29,7 @@ const app = express()
 // app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
 
 const root = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hello: (parent, args, context, info) => {
     console.log('hello: parent', parent)
     // console.log('hello: args', args)
