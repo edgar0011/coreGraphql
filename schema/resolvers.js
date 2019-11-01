@@ -21,5 +21,23 @@ export default {
       console.log(data)
       return `response: ${data}`
     },
+    item: (args, context, info, ddd) => {
+      console.log('item: args', args)
+      // console.log('item: context', context)
+      // console.log('item: info', info)
+      context.hello = 'from item'
+      console.log('item: ddd', ddd)
+      return {
+        book: 'sdssds',
+      }
+    },
+  },
+  Item: {
+    book: (args, context, info, ddd) => {
+      console.log('book: args', args)
+      console.log('book: context', context.hello)
+      // console.log('book: info', info)
+      console.log('book: ddd', ddd)
+    },
   },
 }

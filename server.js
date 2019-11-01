@@ -7,18 +7,18 @@ import bodyParser from 'body-parser'
 // import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 // AND equivalent to, which is better:
 import graphqlHTTP from 'express-graphql'
-// import { makeExecutableSchema } from 'graphql-tools';
-import { buildSchema } from 'graphql'
+import { makeExecutableSchema } from 'graphql-tools'
+// import { buildSchema } from 'graphql'
 
 import typeDefs from './schema/typeDefs'
-// import resolvers from './schema/resolvers';
+import resolvers from './schema/resolvers'
 
-// const schema = makeExecutableSchema({
-//   typeDefs,
-//   resolvers,
-// });
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+})
 
-const schema = buildSchema(typeDefs)
+// const schema = buildSchema(typeDefs)
 
 const PORT = 8080
 const app = express()
@@ -29,36 +29,44 @@ const app = express()
 // app.use('/graphql', graphqlHTTP({ schema, graphiql: false }));
 // app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const root = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // Query: {
-    hello: (args, context, info, ddd) => {
-      console.log('hello: args', args)
-      console.log('hello: context', context)
-      console.log('hello: info', info)
-      console.log('hello: ddd', ddd)
-      return 'Hello world!'
+  hello: (args, context, info, ddd) => {
+    console.log('hello:', args, context, info, ddd)
+    // console.log('hello: args', args)
+    // console.log('hello: context', context)
+    // console.log('hello: info', info)
+    // console.log('hello: ddd', ddd)
+    return 'Hello world!'
+  },
+  item: (args, context, info, ddd) => {
+    // console.log('item:', args, context, info, ddd)
+    console.log('item: args', args)
+    // console.log('item: context', context)
+    // console.log('item: info', info)
+    console.log('item: ddd', ddd)
+    return {
+      book: 'sdssds',
+    }
+  },
+
+  Item: {
+    book: (args, context, info, ddd) => {
+      console.log('book:', args, context, info, ddd)
+      // console.log('book: args', args)
+      // console.log('book: context', context)
+      // console.log('book: info', info)
+      // console.log('book: ddd', ddd)
+      return 'book book'
     },
-    item: {
-      book: (args, context, info, ddd) => {
-        console.log('book: args', args)
-        console.log('book: context', context)
-        console.log('book: info', info)
-        console.log('book: ddd', ddd)
-      },
-    },
-  // },
+  },
 }
 
 app.use(bodyParser.json())
 app.use('/graphql', graphqlHTTP({
   schema,
-  // rootValue: {
-  //   Query: {
-  //     ...resolvers.Query
-  //   }
-  // },
-  rootValue: root,
+  // rootValue: root,
   graphiql: true,
 }))
 
