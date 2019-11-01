@@ -1,6 +1,7 @@
 
 import express from 'express'
 import bodyParser from 'body-parser'
+// DEPRECATED
 // import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
 // is the SAME !!!!!!
 // import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
@@ -30,13 +31,23 @@ const app = express()
 
 const root = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  hello: (parent, args, context, info) => {
-    console.log('hello: parent', parent)
-    // console.log('hello: args', args)
-    // console.log('hello: context', context)
-    // console.log('hello: info', info)
-    return 'Hello world!'
-  },
+  // Query: {
+    hello: (args, context, info, ddd) => {
+      console.log('hello: args', args)
+      console.log('hello: context', context)
+      console.log('hello: info', info)
+      console.log('hello: ddd', ddd)
+      return 'Hello world!'
+    },
+    item: {
+      book: (args, context, info, ddd) => {
+        console.log('book: args', args)
+        console.log('book: context', context)
+        console.log('book: info', info)
+        console.log('book: ddd', ddd)
+      },
+    },
+  // },
 }
 
 app.use(bodyParser.json())
